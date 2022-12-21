@@ -20,7 +20,16 @@ const crearCliente = (nombre, email) => {
   });
 }
 
+// Creo una nueva funcion que me permita eliminar un cliente
+const eliminarCliente = (id) => {
+  // console.log('Eliminar cliente', id);
+  return fetch(`http://localhost:3000/perfil/${id}`, {
+    method: "DELETE",
+  });
+}
+
 export const clientServices = {
   listaClientes,
   crearCliente,
+  eliminarCliente,
 };

@@ -20,11 +20,11 @@ formulario.addEventListener('submit', (evento) => {
   // Ahora que ya tenemos la informacion del formulario, tenemos que enviarla al servidor y eso se lo delegamos a un servicio o funcion querreciba esos datos y los envie al servidor.
   clientServices
     .crearCliente(nombre, email)
-    .then((respuesta) => {
+    .then(() => {
       // console.log(respuesta);
       // Aqui le decimos cual es el archivo que queremos que se abra
       window.location.href = "../screens/registro_completado.html";
   }).catch((error) => {
-    console.log(error);
+    // console.log(error);
   });
 });
