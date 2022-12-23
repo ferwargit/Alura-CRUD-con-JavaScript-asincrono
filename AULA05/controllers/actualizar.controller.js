@@ -12,11 +12,31 @@ const obtenerInformacion = async () => {
 
   const nombre = document.querySelector("[data-nombre]");
   const email = document.querySelector("[data-email]");
-  // Aqui se llama asincronamente al servicio para obtener el cliente
-  // y la respuesta se guarda en la variable perfil
-  const perfil = await clientServices.detalleCliente(id);
-  nombre.value = perfil.nombre;
-  email.value = perfil.email;
+
+  try {
+    // Aqui se llama asincronamente al servicio para obtener el cliente
+    // y la respuesta se guarda en la variable perfil
+    const perfil = await clientServices.detalleCliente(id);
+    // console.log(perfil);
+    // Hacemos una validacion para ver si el cliente existe
+    if (perfil.nombre && perfil.email) {
+      nombre.value = perfil.nombre;
+      email.value = perfil.email;
+    } else {
+      // Activamos un error
+      throw new Error("El cliente no existe");
+    }
+    
+  } catch (error) {
+    // console.log('Catch Erorr -', error);
+    // alert('Hubo un error al obtener el cliente');
+    window.location.href = "../screens/error.html";
+  }
+
+
+
+
+  
   
 };
 

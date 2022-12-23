@@ -81,4 +81,31 @@ Después, para subir el servidor, ejecutamos json-server --watch db.json, como l
 
 <https://www.aluracursos.com/blog/diferencias-entre-get-y-post>
 
+## Refactorización
 
+```js
+const render = () => { 
+    clienteService.listaClientes()
+        .then(data => {
+            data.forEach(elemento => {
+            tabla.appendChild(creaNuevaLinea(elemento.nombre, elemento.correo, elemento.id))
+        })
+    })
+}
+```
+Utilizando async/await tenemos una función asíncrona que podemos leer de forma estructural, lo que nos trae beneficios de mantenimiento y legibilidad para nuestro código. Y el uso de try/catch nos ayuda a lidiar con los errores.
+
+```js
+const render = async () =>  {
+    try {
+        const listaClientes = await clienteService.listaClientes()
+        listaClientes.forEach(elemento => {
+            tabla.appendChild(creaNuevaLinea(elemento.nombre,elemento.correo, elemento.id))
+        })
+    }
+    catch(error){
+        console.log(error)
+        window.location.href="../telas/error.html"
+    }
+}
+```
